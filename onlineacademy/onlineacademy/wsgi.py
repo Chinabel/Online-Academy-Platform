@@ -1,5 +1,5 @@
 """
-WSGI config for oacademyapp project.
+WSGI config for onlineacademy project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

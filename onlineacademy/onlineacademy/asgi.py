@@ -1,5 +1,5 @@
 """
-ASGI config for oacademyapp project.
+ASGI config for onlineacademy project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
