@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Onlineacademy.urls'
+ROOT_URLCONF = 'onlineacademy.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Onlineacademy.wsgi.application'
+WSGI_APPLICATION = 'onlineacademy.wsgi.application'
 
 
 # Database
