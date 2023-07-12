@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn learnhub.wsgi --log-file=-
+web: gunicorn onlineacademy.wsgi --log-file=-
