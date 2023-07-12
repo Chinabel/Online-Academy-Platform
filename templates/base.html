@@ -51,7 +51,7 @@
                 {% if user.is_authenticated %}
                 <a class="dropdown-item" href="{% url 'notes' %}">Notes</a>
                 <a class="dropdown-item" href="{% url 'assignment' %}">Assignment</a>
-                <a class="dropdown-item" href="{% url 'tasks' %}">Tasks</a>
+                <a class="dropdown-item" href="{% url 'todo' %}">Todo</a>
 
                 <div class="dropdown-divider"></div>
                 {% endif %}
@@ -100,7 +100,7 @@
 
   <footer class="fixed-bottom text-center text-lg-start" style="">
     <div class="text-blue bg-white text-center p-3">
-      Made with ❤️ by
+      Created by
       <a class="text-white" href="https://github.com/Chinabel" target="_blank"><i>Chinabel</i></a>
       <a class="text-white" href="https://github.com/NonsoGodson" target="_blank"><i>NonsoGodson</i></a>
     </div>
