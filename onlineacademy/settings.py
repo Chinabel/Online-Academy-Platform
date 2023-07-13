@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 env=environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(env_file=str(BASE_DIR) + '/.env')
 
 
 def get_env_variable(var_name):
@@ -36,10 +36,10 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(error_msg)
 
 
-SECRET_KEY = get_env_variable('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
