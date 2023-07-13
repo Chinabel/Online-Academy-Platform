@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from contacts import forms
+from contacts.forms import FormClassName # or wildcard '*'
 from forms import *
 from django.contrib import messages
 from django.views import generic
