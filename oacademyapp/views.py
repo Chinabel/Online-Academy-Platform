@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from . forms import *
+from contacts import forms
+from forms import *
 from django.contrib import messages
 from django.views import generic
 from youtubesearchpython import VideosSearch
