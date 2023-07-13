@@ -26,12 +26,12 @@ env=environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "r@UH$%^&123456"
+SECRET_KEY = "**************"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [oacademy-ffa5f69c1d76.herokuapp.com]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
