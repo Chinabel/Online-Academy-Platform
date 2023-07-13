@@ -20,7 +20,8 @@ from oacademyapp.views import register, profile
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^$', views.index, name='index'),
+    path(r'^admin/', include('admin.site.urls')),
     path('', include('oacademyapp.urls')),
     path('register/', register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
