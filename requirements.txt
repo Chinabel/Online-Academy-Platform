@@ -2,11 +2,8 @@ asgiref==3.7.2
 Django==4.2.3
 python-decouple==3.8
 sqlparse==0.4.4
-<<<<<<< HEAD
 whitenoise==6.5.0
-=======
 tzdata==2022.1
 urllib3==1.26.9
 whitenoise==6.5.0
 youtube-search-python==1.6.5
->>>>>>> a4a43067b6a6d9dd51f8f4cfecad0c74d992a9af
