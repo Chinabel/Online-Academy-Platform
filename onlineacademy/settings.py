@@ -89,9 +89,9 @@ DATABASES = {
 
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME': os.getenv('onlineacademy'),
-         'USER': env('***'),
-         'PASSWORD': env('***'),
-         'HOST':env('localhost'),
+         'USER': os.getenv('***'),
+         'PASSWORD': os.getenv('***'),
+         'HOST':os.getenv('localhost'),
          'PORT': '5432',
     }
 }
