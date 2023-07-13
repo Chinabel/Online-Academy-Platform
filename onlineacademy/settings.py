@@ -86,10 +86,10 @@ DATABASES = {
          #'NAME': BASE_DIR / 'db.sqlite3',
 
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': env('NAME'),
-         'USER': env('USER'),
-         'PASSWORD': env('PASSWORD'),
-         'HOST':env('HOST'),
+         'NAME': env('onlineacademy'),
+         'USER': env('***'),
+         'PASSWORD': env('***'),
+         'HOST':env('localhost'),
          'PORT': '5432',
     }
 }
