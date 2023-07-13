@@ -28,15 +28,7 @@ env=environ.Env()
 environ.Env.read_env(env_file=str(BASE_DIR) + '/.env')
 
 
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = "set the %s environment variable" % var_name
-        raise ImproperlyConfigured(error_msg)
-
-
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
