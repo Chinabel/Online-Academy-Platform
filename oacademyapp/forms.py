@@ -1,4 +1,5 @@
 from django import forms
+from dataclasses import fields
 from . models import *
 from django.contrib.auth.forms import UserCreationForm
 
