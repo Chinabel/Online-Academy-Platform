@@ -93,7 +93,7 @@ DATABASES = {
          'NAME': os.getenv('onlineacademy'),
          'USER': os.getenv('***'),
          'PASSWORD': os.getenv('***'),
-         'HOST':os.getenv('localhost'),
+         'HOST':os.getenv('*'),
          'PORT': '5432',
     }
 }
