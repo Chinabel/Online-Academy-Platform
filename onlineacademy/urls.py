@@ -23,7 +23,6 @@ from oacademyapp import views
 urlpatterns = [
     path(r'^$', views.index, name='index'),
     path('',views.home, name="home"),
-    path('delete/',views.delete, name="delete"),
     path(r'^admin/', include('admin.site.urls')),
     path('', include('oacademyapp.urls')),
     path('register/', register, name='register'),
