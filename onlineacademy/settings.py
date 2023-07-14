@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import django_heroku
 import environ
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,12 +34,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'oacademy-ffa5f69c1d76.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,6 +100,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,11 +138,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT= BASE_DIR / 'staticfiles'
+
+#location where django collect all static files
+STATIC_ROOT= os.path.join(BASE_DIR,'static')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'static')
+
+# location where you will store your static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'project_name/static')
 ]
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
 
 django_heroku.settings(locals())
 
