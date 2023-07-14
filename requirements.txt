@@ -15,6 +15,7 @@ h11==0.14.0
 httpcore==0.17.3
 httpx==0.24.1
 idna==3.4
+postgresql==12
 psycopg2==2.9.6
 pur==7.1.0
 requests==2.31.0
