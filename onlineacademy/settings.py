@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'crispy_forms',
+    'myproject',
+    'mptt',
 ]
 
 SITE_ID = 1
