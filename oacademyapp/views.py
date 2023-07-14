@@ -12,6 +12,11 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'dashboard/home.html')
 
+def index(request):
+    items = Items.object.order_by("-publish_date")
+    now = datetime.datetime.now()
+    return render(request,'portfolio/index.html', {"items": items, "year": now.year})
+
 @login_required
 def notes(request):
    if request.method=="POST":
