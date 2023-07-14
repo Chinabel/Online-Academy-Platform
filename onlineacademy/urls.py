@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from oacademyapp.views import register, profile
-from .views import index
+from users_list import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path(r'^$', views.index, name='index'),
+    path('',views.home, name="home"),
+    path('delete/',views.delete, name="delete"),
     path(r'^admin', include('admin.site.urls')),
     path('', include('oacademyapp.urls')),
     path('register/', register, name='register'),
