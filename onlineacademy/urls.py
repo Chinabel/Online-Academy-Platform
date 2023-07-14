@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from oacademy import views
 from oacademyapp.views import register, profile
 from .views import index
 from django.contrib.auth import views as auth_views
