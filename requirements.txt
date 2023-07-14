@@ -25,3 +25,4 @@ typing_extensions==4.7.1
 urllib3==2.0.3
 whitenoise==6.5.0
 python-dotenv
+youtube-search-python==1.6.6
