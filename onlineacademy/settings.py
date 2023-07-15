@@ -142,7 +142,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # location where you will store your static files
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/build/static'), )
-]
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
