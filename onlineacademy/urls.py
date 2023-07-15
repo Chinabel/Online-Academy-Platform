@@ -23,7 +23,6 @@ from django.contrib.auth import views as auth_views
 from oacademyapp import views
 
 urlpatterns = [
-    path(r'^$', views.index, name='index'),
     path('',views.home, name="home"),
     path('admin/', admin.site.urls),
     path('', include('oacademyapp.urls')),
