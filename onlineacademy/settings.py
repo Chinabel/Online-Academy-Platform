@@ -137,7 +137,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 #location where django collect all static files
-STATIC_ROOT= os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT= os.path.join(BASE_DIR, 'onlineacademy')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # location where you will store your static files
