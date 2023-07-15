@@ -138,7 +138,7 @@ STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # location where you will store your static files
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR, "static/"]
 
 
 MEDIA_ROOT = BASE_DIR / 'media/'
