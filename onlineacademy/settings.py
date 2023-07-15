@@ -137,14 +137,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 #location where django collect all static files
-STATIC_ROOT= "/var/www/oacademy-ffa5f69c1d76.herokuapp.com/static/"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # location where you will store your static files
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    "/var/www/static/",
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 
 MEDIA_ROOT = BASE_DIR / 'media/'
