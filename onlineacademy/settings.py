@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'oacademyapp',
     'crispy_forms',
-    'home',
 ]
 
 
@@ -142,7 +141,7 @@ STATIC_ROOT= os.path.join(BASE_DIR,'static')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # location where you will store your static files
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'home/static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'oacademyapp/static'), )
 
 
 MEDIA_ROOT = BASE_DIR / 'media/'
