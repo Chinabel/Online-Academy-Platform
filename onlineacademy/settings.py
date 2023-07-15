@@ -137,12 +137,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 #location where django collect all static files
-STATIC_ROOT= os.path.join(BASE_DIR, 'onlineacademy')
+STATIC_ROOT= BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # location where you will store your static files
-STATICFILES_DIRS = [BASE_DIR, 'static']
-
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_ROOT = BASE_DIR / 'media/'
 MEDIA_URL = '/media/'
