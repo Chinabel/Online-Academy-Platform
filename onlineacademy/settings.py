@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import django-on-heroku
 import environ
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
@@ -34,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'oacademy-ffa5f69c1d76.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '*', '127.0.0.1', 'oacademy-ffa5f69c1d76.herokuapp.com']
 
 
 # Application definition
@@ -151,9 +150,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'project_name/static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-
-
-django_heroku.settings(locals())
 
 
 # Default primary key field type
