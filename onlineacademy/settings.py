@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', '*', '127.0.0.1', 'oacademy-ffa5f69c1d76.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '*', 'oacademy-ffa5f69c1d76.herokuapp.com']
 
 
 # Application definition
@@ -137,7 +137,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #location where django collect all static files
-STATIC_ROOT= os.path.join(BASE_DIR,'static')
+STATIC_ROOT= "/var/www/oacademy-ffa5f69c1d76.herokuapp.com/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # location where you will store your static files
