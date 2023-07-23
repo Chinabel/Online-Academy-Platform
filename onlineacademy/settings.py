@@ -17,7 +17,7 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,8 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 env=environ.Env()
 environ.Env.read_env(env_file=str(BASE_DIR) + '/.env')
 
-
-SECRET_KEY = os.getenv('SECRET_KEY')
+def get_env_variable(var_name):
+try:
+    return os.environ[var_name]
+except KeyError:
+    error_msg = "set the %s environment variable" % var_name
+    raise ImproperlyConfigured(error_msg)
+    
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
