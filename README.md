@@ -36,7 +36,7 @@ We welcome contributions! To contribute to the OnlineAcademy App, follow these s
 Please make sure to follow the coding style and write unit tests where applicable.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Chinabel/onlineacademy-app/blob/main/LICENSE) file for details.
 
 ## Contact
 For any inquiries, feedback, or support, please contact us at:
