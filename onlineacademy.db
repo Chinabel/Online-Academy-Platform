@@ -1,0 +1,87 @@
+import sqlite3
+
+# Function to create the SQLite database and tables
+def create_db():
+    # Connect to SQLite database (or create it)
+    conn = sqlite3.connect('onlineacademy.db')
+    cursor = conn.cursor()
+
+    # Create tables
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            role TEXT CHECK(role IN ('student', 'instructor', 'admin')) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS courses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            description TEXT,
+            instructor_id INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (instructor_id) REFERENCES users(id)
+        );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS lessons (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            course_id INTEGER,
+            title TEXT NOT NULL,
+            content TEXT,
+            video_url TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (course_id) REFERENCES courses(id)
+        );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS enrollments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            course_id INTEGER,
+            enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (course_id) REFERENCES courses(id),
+            UNIQUE(user_id, course_id)
+        );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS assignments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            course_id INTEGER,
+            title TEXT NOT NULL,
+            description TEXT,
+            due_date TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (course_id) REFERENCES courses(id)
+        );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS submissions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            assignment_id INTEGER,
+            user_id INTEGER,
+            submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            content TEXT,
+            grade INTEGER,
+            FOREIGN KEY (assignment_id) REFERENCES assignments(id),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+    ''')
+
+    # Commit and close the connection
+    conn.commit()
+    conn.close()
+
+# Create the database
+create_db()
+print("Database and tables created successfully.")
