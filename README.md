@@ -40,6 +40,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Contact
 For any inquiries, feedback, or support, please contact us at:
--Email: christabelogugua@gmail.com
--GitHub: [OnlineAcademy on GitHub](https://github.com/Chinabel/onlineacademy-app/tree/main)
+- Email: christabelogugua@gmail.com
+- GitHub: [OnlineAcademy on GitHub](https://github.com/Chinabel/onlineacademy-app/tree/main)
 
