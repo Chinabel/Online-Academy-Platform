@@ -35,10 +35,10 @@ We welcome contributions! To contribute to the OnlineAcademy App, follow these s
 
 Please make sure to follow the coding style and write unit tests where applicable.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Contact
+## Contact
 For any inquiries, feedback, or support, please contact us at:
 Email: christabelogugua@gmail.com
 GitHub: OnlineAcademy on GitHub
