@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import *
@@ -10,10 +11,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    return render(request, 'dashboard/home.html')
+    return render(request, 'home/index.html')
 
 def index(request):
-    items = Items.object.order_by("-publish_date")
+    items = items.object.order_by("-publish_date")
     now = datetime.datetime.now()
     return render(request,'portfolio/index.html', {"items": items, "year": now.year})
 

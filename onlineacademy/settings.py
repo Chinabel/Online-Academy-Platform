@@ -132,7 +132,8 @@ REST_FRAMEWORK = {
 env_file = BASE_DIR / '.env'
 if env_file.exists():
     environ.Env.read_env(str(env_file))
-
+    
+DJANGO_SETTINGS_MODULE = env('DJANGO_SETTINGS_MODULE', default='onlineacademy.settings')
 DJANGO_ENV = env('DJANGO_ENV', default='development')  # You can set a default value here
 DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')  # Default to 'development' if not set
 
