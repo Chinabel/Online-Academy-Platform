@@ -19,12 +19,6 @@ class Assignment(models.Model):
     is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def is_completed(self):
-        return self.status
-
-    def created_at(self):
-        return self.created_at
-
     def __str__(self):
         return self.title
 

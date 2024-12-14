@@ -45,8 +45,10 @@ ROOT_URLCONF = 'onlineacademy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
+        'APP_DIRS': True, 
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -62,7 +64,14 @@ WSGI_APPLICATION = 'onlineacademy.wsgi.application'
 
 # Database configuration (using environment variable for DB URL)
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='sqlite:///db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'onlineacademy',
+        'USER': 'onlineacademy',
+        'PASSWORD': 'Pa$$w0rd',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 # Password validation

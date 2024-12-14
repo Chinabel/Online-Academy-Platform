@@ -25,6 +25,7 @@ def home(request):
     assignments = Assignment.objects.all()
 
     return render(request, 'home.html', {'courses': courses, 'assignments': assignments})
+    return render(request, 'onlineacademy/template_name.html')
 
 def index(request):
     items = items.object.order_by("-publish_date")
@@ -89,16 +90,16 @@ def youtube(request):
     return render(request, 'youtube.html', {'videos': youtube_videos})
 
 
-def todos(request):
+def todo(request):
     """
     View to manage and display to-do items.
     """
-    todos_list = Todo.objects.filter(user=request.user)  # Filter todos for logged-in user
-    return render(request, 'todos.html', {'todos': todos_list})
+    todo_list = Todo.objects.filter(user=request.user)
+    return render(request, 'todo.html', {'todos': todo_list})
 
 def todo_list(request):
-    todos = Todo.objects.all()
-    return render(request, 'todo_list.html', {'todos': todos})
+    todo = Todo.objects.all()
+    return render(request, 'todo_list.html', {'todo': todo})
 
 def todo_detail(request, id):
     todo = Todo.objects.get(id=id)
@@ -112,7 +113,7 @@ def add_todo(request):
         title = request.POST.get('title')
         new_todo = Todo(title=title, user=request.user)
         new_todo.save()
-        return redirect('todos')  # Redirect to the todos list page
+        return redirect('todo')  # Redirect to the todos list page
 
     return render(request, 'add_todo.html')
 
@@ -200,3 +201,7 @@ def profile(request):
         user_profile.save()
 
     return render(request, 'profile.html', {'profile': request.user.profile})
+
+
+def about(request):
+    return render(request, 'about.html')

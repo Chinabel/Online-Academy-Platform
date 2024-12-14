@@ -21,7 +21,7 @@ footer {
 }
 
 .navbar {
-    background-color: rgb(0, 0, 0) !important;
+    background-color: rgba(242, 241, 250, 0.021) !important;
     /* background: linear-gradient(to bottom, #cbc3e3 0%, #b2beb5 100%) !important; */
 }
 
@@ -35,7 +35,7 @@ footer {
 
 
 .card-header:hover {
-    background: rgb(11, 22, 83) !important;
+    background: rgb(26, 48, 172) !important;
     color: whitesmoke !important;
     transition: 0.1s ease-in;
 }
@@ -70,7 +70,7 @@ a:hover {
 }
 
 .icon-bar {
-    color: black;
+    color: rgb(218, 84, 84);
 }
 
 
