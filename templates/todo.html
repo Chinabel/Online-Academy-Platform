@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="container">
-{% if not ALL_TASKS_DONE %}
+{% if not ALL_TASKS_COMPLETED %}
     <table class="table table-striped table-bordered table-hover table-dark">
         <thead>
             <tr>
@@ -41,7 +41,7 @@
     </table>
 
     {% else %}
-    <h4>All tasks have been done!! create to add more</h4>
+    <h4>All tasks have been completed!! create to add more</h4>
     {% endif %}
 </div><br><br>
 <div class="container">

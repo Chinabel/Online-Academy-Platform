@@ -1,0 +1,6 @@
+<!-- onlineacademy/templates/add_todo.html -->
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Render form fields -->
+    <button type="submit">Add Todo</button>
+</form>

@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # If using Django sites framework
     'rest_framework',  # For building APIs (optional)
     'rest_framework.authtoken',  # For token authentication (optional)
-    'onlineacademy',  # Your app
+    'oacademyapp',  # Your app
 ]
 
 MIDDLEWARE = [

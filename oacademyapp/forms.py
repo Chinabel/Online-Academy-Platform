@@ -1,22 +1,23 @@
 from django import forms
 from dataclasses import fields
 from . models import *
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-class NotesForm(forms.ModelForm):
+class CourseForm(forms.ModelForm):
     class Meta:
-        model=Notes
+        model=Course
         fields=['title','description']
 
 
 class DateInput(forms.DateInput):
     input_type='date'
 
-class AssignmentsForm(forms.ModelForm):
+class AssignmentForm(forms.ModelForm):
     class Meta:
-        model=Assignments
+        model=Assignment
         widgets={'due':DateInput()}
-        fields=['subject', 'title', 'description', 'due', 'is_finished']
+        fields = ['title']
 
 class DashboardForm(forms.Form):
     text = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Search', 'required': 'true'}),
@@ -24,14 +25,10 @@ class DashboardForm(forms.Form):
 
 class TodoForm(forms.ModelForm):
     class Meta:
-        model=Todo
-        fields=['task', 'status']
-        labels={
-        	'status': 'Is_finished'
-        }
-
+        model = Todo
+        fields = ['title', 'task', 'status']  
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model=User
-        fields=['username', 'password1', 'password2']
+        fields=['username', 'password1', 'password2', 'email']
