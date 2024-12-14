@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Online Academy</title>
+    <title>Assignments - Online Academy</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -17,17 +17,26 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'courses' %}">Courses</a></li>
                 <li><a href="{% url 'assignments' %}">Assignments</a></li>
+                <li><a href="{% url 'todo' %}">To-do List</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Create an Account</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
-        </form>
+        <h1>All Assignments</h1>
+        <ul>
+            {% for assignment in assignments %}
+                <li>
+                    <a href="{% url 'assignment_detail' assignment.id %}">
+                        <h3>{{ assignment.title }}</h3>
+                        <p>Due: {{ assignment.due_date }}</p>
+                    </a>
+                </li>
+            {% empty %}
+                <li>No assignments available.</li>
+            {% endfor %}
+        </ul>
     </main>
 
     <footer>

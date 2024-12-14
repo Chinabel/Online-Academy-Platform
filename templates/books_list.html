@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile</title>
+    <title>Books - Online Academy</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -19,15 +19,27 @@
                 <li><a href="{% url 'assignments' %}">Assignments</a></li>
                 <li><a href="{% url 'todo' %}">To-do List</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'books' %}">Books</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Your Profile</h1>
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Joined on:</strong> {{ user.date_joined }}</p>
+        <h1>Available Books</h1>
+        <ul>
+            {% for book in books %}
+                <li>
+                    <a href="{% url 'book_detail' book.id %}">
+                        <h3>{{ book.title }}</h3>
+                        <p><strong>Author:</strong> {{ book.author }}</p>
+                        <p><strong>Category:</strong> {{ book.category }}</p>
+                        <p><strong>Description:</strong> {{ book.description }}</p>
+                    </a>
+                </li>
+            {% empty %}
+                <li>No books available yet.</li>
+            {% endfor %}
+        </ul>
     </main>
 
     <footer>

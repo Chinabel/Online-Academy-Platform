@@ -25,6 +25,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.oacademyapp, name='oacademyapp'),
+    path('admin/', admin.site.urls),
+    path('', include('oacademyapp.urls')),
     path('courses/', views.courses, name='courses'),
     path('courses/<int:course_id>/', views.course_detail, name='course_detail'),
     path('assignments/', views.assignments, name='assignments'),

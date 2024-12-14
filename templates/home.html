@@ -1,114 +1,71 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-<section class="container text-center">
-  {% if user.is_authenticated %}
-  <h3>Welcome, <span class="text-uppercase">{{user.username}}</span> </h3>
-  <hr>
-  {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Academy</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
 
-  <br>
-  <div class="row">
-    <div class="col-md-4">
-      <a href="{% url 'notes' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/notes.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Notes
-            </h5>
-            Create Notes to refer them later. They are stored permanently until deleted
-          </div>
-        </div>
-      </a>
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'courses' %}">Courses</a></li>
+                <li><a href="{% url 'assignments' %}">Assignments</a></li>
+                <li><a href="{% url 'todo' %}">To-do List</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'books' %}">Books</a></li>
+                <li><a href="{% url 'dictionary' %}">Dictionary</a></li>
+                <li><a href="{% url 'youtube' %}">YouTube</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="col-md-4">
-      <a href="{% url 'assignment' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/assignment.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Assignments
-            </h5>
-            Add assignments with deadlines. They will be displayed prioritised by deadlines
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    <div class="col-md-4">
-      <a href="{% url 'todo' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/tasks.png' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              To Do
-            </h5>
-            Add your to-do lists for your day and remove them as you finish
-          </div>
-        </div>
-      </a>
-    </div>
+    <main>
+        <section>
+            <h1>Welcome to the Online Academy</h1>
+            <p>Start learning today with our wide range of courses!</p>
+        </section>
 
-  </div>
-  <br><br><br>
+        <section>
+            <h2>Featured Courses</h2>
+            <ul>
+                {% for course in courses %}
+                    <li>
+                        <a href="{% url 'course_detail' course.id %}">
+                            <h3>{{ course.name }}</h3>
+                            <p>{{ course.description }}</p>
+                        </a>
+                    </li>
+                {% empty %}
+                    <li>No courses available yet.</li>
+                {% endfor %}
+            </ul>
+        </section>
 
+        <section>
+            <h2>Upcoming Assignments</h2>
+            <ul>
+                {% for assignment in assignments %}
+                    <li>
+                        <h3>{{ assignment.title }}</h3>
+                        <p>Due: {{ assignment.due_date }}</p>
+                    </li>
+                {% empty %}
+                    <li>No assignments due at the moment.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
 
-  <div class="row pb-5">
+    <footer>
+        <p>&copy; 2024 Online Academy. All rights reserved.</p>
+    </footer>
 
-    <div class="col-md-4">
-      <a href="{% url 'youtube' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/youtube.png' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Youtube
-            </h5>
-            Search Youtube and select your desired video to play it on youtube
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-md-4">
-      <a href="{% url 'books' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/books.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Books
-            </h5>
-            Browse books from a list displayed in the menu
-          </div>
-        </div>
-      </a>
-    </div>
-
-
-    <div class="col-md-4">
-      <a href="{% url 'dict' %}">
-        <div class="card">
-          <img class="card-img-top">
-          <img src="{% static 'images/dictionary.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Dictionary
-            </h5>
-            A vocabulary from a book is troubling you? No problem,just enter the word.
-          </div>
-        </div>
-      </a>
-    </div>
-
-  </div>
-
-
-</section>
-{% endblock content %}
+</body>
+</html>

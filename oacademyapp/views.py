@@ -21,7 +21,10 @@ def home(request):
     """
     Home page view.
     """
-    return render(request, 'home.html')  # Render home page
+    courses = Course.objects.all()
+    assignments = Assignment.objects.all()
+
+    return render(request, 'home.html', {'courses': courses, 'assignments': assignments})
 
 def index(request):
     items = items.object.order_by("-publish_date")
@@ -34,6 +37,10 @@ def courses(request):
     """
     course_list = Course.objects.all()
     return render(request, 'courses.html', {'courses': course_list})
+
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'course_list.html', {'courses': courses})
 
 def course_detail(request, course_id):
     """
@@ -66,6 +73,9 @@ def assignment_detail(request, assignment_id):
 
     return render(request, 'assignment_detail.html', {'assignment': assignment})
 
+def assignment_list(request):
+    assignments = Assignment.objects.all()
+    return render(request, 'oacademyapp/assignment_list.html', {'assignments': assignments})
 
 def youtube(request):
     """
@@ -86,6 +96,13 @@ def todos(request):
     todos_list = Todo.objects.filter(user=request.user)  # Filter todos for logged-in user
     return render(request, 'todos.html', {'todos': todos_list})
 
+def todo_list(request):
+    todos = Todo.objects.all()
+    return render(request, 'todo_list.html', {'todos': todos})
+
+def todo_detail(request, id):
+    todo = Todo.objects.get(id=id)
+    return render(request, 'todo_detail.html', {'todo': todo})
 
 def add_todo(request):
     """
@@ -107,6 +124,9 @@ def books(request):
     book_list = Book.objects.all()  # Assuming a 'Book' model
     return render(request, 'books.html', {'books': book_list})
 
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'oacademyapp/book_list.html', {'books': books})
 
 def book_detail(request, book_id):
     """

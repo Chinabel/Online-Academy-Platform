@@ -9,7 +9,6 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']  # Fields to search by in the admin interface
     list_filter = ['created_at']  # Filter by the creation date
 
-# Register the model and the custom admin class
 admin.site.register(Course, CourseAdmin)
 
 # Admin interface for Assignment model
@@ -18,6 +17,8 @@ class AssignmentAdmin(admin.ModelAdmin):
     list_filter = ['is_completed']
     ordering = ['created_at']
 
+admin.site.register(Assignment, AssignmentAdmin)
+
 # Admin interface for Todo model
 class TodoAdmin(admin.ModelAdmin):
     list_display = ['title', 'assignment', 'due_date', 'is_completed']
@@ -25,6 +26,4 @@ class TodoAdmin(admin.ModelAdmin):
     list_filter = ['is_completed', 'due_date']
     ordering = ('due_date',)
 
-# Register models with custom admin classes
-admin.site.register(Assignment, AssignmentAdmin)
 admin.site.register(Todo, TodoAdmin)
