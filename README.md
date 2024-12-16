@@ -21,8 +21,8 @@ The OnlineAcademy App allows users to browse, enroll in, and complete online cou
 - Instructor Features: Instructors can upload courses, create quizzes, and view student progress.
 
 ## Technologies Used
-Frontend: React.js, Redux, HTML, CSS, Material-UI
-Backend: Node.js, Express, MongoDB (or PostgreSQL)
+Frontend: Django, Python, HTML, CSS
+Backend: PostgreSQL
 Authentication: JWT (JSON Web Tokens), OAuth (Google/Facebook login integration)
 
 ## Contributing
