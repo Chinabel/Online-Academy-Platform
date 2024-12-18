@@ -1,18 +1,20 @@
 import os
-from pathlib import Path
 import environ
+from pathlib import Path
+from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 # Initialize environment variables
 env = environ.Env()
-# Read .env file, if it exists
 environ.Env.read_env()
+SECRET_KEY = env('SECRET_KEY')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'onlineacademy.settings'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/ref/settings/
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env('SECRET_KEY')  # Load from environment variable or .env file
-DEBUG = env.bool('DEBUG', default=False)  # Load from environment or default to False
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost'])
 
@@ -24,10 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # If using Django sites framework
-    'rest_framework',  # For building APIs (optional)
-    'rest_framework.authtoken',  # For token authentication (optional)
-    'oacademyapp',  # Your app
+    'django.contrib.sites',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'oacademyapp',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +69,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'onlineacademy',
-        'USER': 'onlineacademy',
+        'USER': 'postgres',
         'PASSWORD': 'Pa$$w0rd',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -90,7 +92,30 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 # Internationalization
+LANGUAGES = [
+    ('en', _('English')),
+]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -111,10 +136,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Session settings (optional)
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Store sessions in the database
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # User authentication settings
-AUTH_USER_MODEL = 'auth.User'  # Default User model (can be customized)
+AUTH_USER_MODEL = 'auth.User'
 
 # Email backend for sending emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -128,23 +153,44 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='your-email-password')
 
 # Rest Framework settings (if using DRF)
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+    ),
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 15,
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 # Django-Environ configuration
-# This will load variables from the .env file for sensitive data like SECRET_KEY, DATABASE_URL, etc.
 env_file = BASE_DIR / '.env'
 if env_file.exists():
     environ.Env.read_env(str(env_file))
     
 DJANGO_SETTINGS_MODULE = env('DJANGO_SETTINGS_MODULE', default='onlineacademy.settings')
-DJANGO_ENV = env('DJANGO_ENV', default='development')  # You can set a default value here
-DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')  # Default to 'development' if not set
+DJANGO_ENV = env('DJANGO_ENV', default='development')
+DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')
 
 if DJANGO_ENV == 'development':
     # Development settings
@@ -173,6 +219,4 @@ elif DJANGO_ENV == 'production':
     ALLOWED_HOSTS = ['yourproductiondomain.com']
 
 
-# CORS settings if you want to enable cross-origin requests
-CORS_ORIGIN_ALLOW_ALL = True  # Set to False and configure specific origins in production
-
+CORS_ORIGIN_ALLOW_ALL = False  # Set to False and configure specific origins in production

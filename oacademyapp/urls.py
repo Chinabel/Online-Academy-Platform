@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import HelloWorldView
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home view
@@ -14,4 +15,5 @@ urlpatterns = [
     path('youtube/', views.youtube, name='youtube'),  # YouTube page
     path('books/', views.book_list, name='books'),  # List of books
     path('about/', views.about, name='about'),
+    path('api/hello/', HelloWorldView.as_view(), name='hello_world'),
 ]

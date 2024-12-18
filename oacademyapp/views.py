@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from .models import Course, Assignment, Todo, Dictionary, Profile, Book
 from .forms import *
@@ -11,11 +11,11 @@ from youtubesearchpython import VideosSearch
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
-# Create your views here.
 def oacademyapp(request):
-    # Your view logic here
-    return render(request, 'template_name.html', {})
+    return render(request, 'home.html', {})
 
 def home(request):
     """
@@ -25,7 +25,6 @@ def home(request):
     assignments = Assignment.objects.all()
 
     return render(request, 'home.html', {'courses': courses, 'assignments': assignments})
-    return render(request, 'onlineacademy/template_name.html')
 
 def index(request):
     items = items.object.order_by("-publish_date")
@@ -205,3 +204,8 @@ def profile(request):
 
 def about(request):
     return render(request, 'about.html')
+
+
+class HelloWorldView(APIView):
+    def get(self, request):
+        return Response({"message": "Hello, World!"})
