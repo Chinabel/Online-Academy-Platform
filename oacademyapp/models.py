@@ -1,12 +1,14 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+from datetime import datetime
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    updated_at = models.DateTimeField(auto_now=True)  # This field should exist in the model
+    updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -14,9 +16,10 @@ class Course(models.Model):
 
 
 class Assignment(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, default='Default Assignment')
     description = models.TextField()
     is_completed = models.BooleanField(default=False)
+    assignment = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -28,7 +31,7 @@ class Todo(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     task = models.TextField(blank=True)  # Assuming 'task' refers to a description of the todo
     status = models.BooleanField(default=False)  # Assuming 'status' refers to completion status
