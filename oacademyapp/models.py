@@ -15,11 +15,14 @@ class Course(models.Model):
         return self.title
 
 
+def get_due_date():
+    return timezone.now() + timezone.timedelta(days=7)
+
 class Assignment(models.Model):
-    title = models.CharField(max_length=255, default='Default Assignment')
+    title = models.CharField(max_length=255)
     description = models.TextField()
     is_completed = models.BooleanField(default=False)
-    assignment = models.DateTimeField(default=timezone.now)
+    due_date = models.DateTimeField(default=get_due_date)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -27,15 +30,19 @@ class Assignment(models.Model):
 
 
 class Todo(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     due_date = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
-    task = models.TextField(blank=True)  # Assuming 'task' refers to a description of the todo
-    status = models.BooleanField(default=False)  # Assuming 'status' refers to completion status
+    task = models.TextField(blank=True)
+    status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_assignment(self):
+        from .models import Assignment
+        return self.assignment
 
     def __str__(self):
         return self.title

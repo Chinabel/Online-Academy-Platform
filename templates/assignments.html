@@ -1,0 +1,46 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <h1>Assignments List</h1>
+
+    <div class="assignment-list">
+        {% if assignments %}
+            <ul>
+                {% for assignment in assignments %}
+                    <li class="assignment-item">
+                        <h2>{{ assignment.title }}</h2>
+                        <p><strong>Description:</strong> {{ assignment.description }}</p>
+                        <p><strong>Completion Status:</strong> 
+                            {% if assignment.is_completed %}
+                                <span style="color: green;">Completed</span>
+                            {% else %}
+                                <span style="color: red;">Not Completed</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Due Date:</strong> {{ assignment.assignment|date:"F j, Y" }}</p> <!-- Displaying formatted due date -->
+
+                        <a href="{% url 'assignment_detail' assignment.id %}" class="view-details-btn">View Details</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No assignments available.</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Online Academy</p>
+    </footer>
+
+</body>
+</html>

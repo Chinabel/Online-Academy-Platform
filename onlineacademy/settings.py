@@ -70,11 +70,19 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'onlineacademy',
         'USER': 'postgres',
-        'PASSWORD': 'Pa$$w0rd',
+        'PASSWORD': '!amoneinamillion@2024',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': '',
+    }
+}
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -156,7 +164,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 
     'DEFAULT_PERMISSION_CLASSES': (
@@ -174,13 +181,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
     ),
-}
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 # Django-Environ configuration

@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from .models import Course, Assignment, Todo, Dictionary, Profile, Book
@@ -62,20 +62,17 @@ def assignments(request):
     return render(request, 'assignments.html', {'assignments': assignment_list})
 
 
-def assignment_detail(request, assignment_id):
+def assignment_detail(request, id):
     """
     View to show details of a specific assignment.
     """
     try:
-        assignment = Assignment.objects.get(id=assignment_id)  # Get assignment by ID
+        assignment = Assignment.objects.get(id=id)  # Get assignment by ID
     except Assignment.DoesNotExist:
         return HttpResponse("Assignment not found", status=404)
 
     return render(request, 'assignment_detail.html', {'assignment': assignment})
 
-def assignment_list(request):
-    assignments = Assignment.objects.all()
-    return render(request, 'oacademyapp/assignment_list.html', {'assignments': assignments})
 
 def youtube(request):
     """
@@ -110,7 +107,21 @@ def add_todo(request):
     """
     if request.method == 'POST':
         title = request.POST.get('title')
-        new_todo = Todo(title=title, user=request.user)
+        description = request.POST.get('description', '')
+        task = request.POST.get('task', '')
+        due_date = request.POST.get('due_date', None)
+        is_completed = request.POST.get('is_completed', False)
+        status = request.POST.get('status', False)
+        
+        new_todo = Todo(
+            title=title,
+            user=request.user,
+            description=description,
+            task=task,
+            due_date=due_date,
+            is_completed=is_completed,
+            status=status
+        )
         new_todo.save()
         return redirect('todo')  # Redirect to the todos list page
 
@@ -204,8 +215,3 @@ def profile(request):
 
 def about(request):
     return render(request, 'about.html')
-
-
-class HelloWorldView(APIView):
-    def get(self, request):
-        return Response({"message": "Hello, World!"})

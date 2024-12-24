@@ -4,7 +4,7 @@ import datetime
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import django.utils.timezone
+from django.utils import timezone
 
 
 class Migration(migrations.Migration):
@@ -137,9 +137,8 @@ class Migration(migrations.Migration):
             model_name="todo",
             name="due_date",
             field=models.DateTimeField(
-                default=datetime.datetime(
-                    2024, 12, 18, 11, 23, 22, 128004, tzinfo=datetime.timezone.utc
-                )
+                null=True,  # Allow null for existing rows
+                blank=True  # Allow blank in forms if needed
             ),
             preserve_default=False,
         ),

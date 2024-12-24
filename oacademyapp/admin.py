@@ -21,9 +21,11 @@ admin.site.register(Assignment, AssignmentAdmin)
 
 # Admin interface for Todo model
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ['title', 'assignment', 'due_date', 'is_completed']
-    search_fields = ['title', 'description']
-    list_filter = ['is_completed', 'due_date']
-    ordering = ('due_date',)
+    list_display = ('id', 'title', 'get_assignment_title', 'due_date', 'is_completed')
+
+    def get_assignment_title(self, obj):
+        return obj.assignment.title  # Access the 'title' field of the related Assignment model
+    get_assignment_title.admin_order_field = 'assignment__title'  # Allow sorting by assignment title
+    get_assignment_title.short_description = 'Assignment Title'  # Customize the column header
 
 admin.site.register(Todo, TodoAdmin)

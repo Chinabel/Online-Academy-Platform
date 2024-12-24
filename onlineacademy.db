@@ -29,31 +29,7 @@ def create_db():
         );
     ''')
 
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS lessons (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            course_id INTEGER,
-            title TEXT NOT NULL,
-            content TEXT,
-            video_url TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (course_id) REFERENCES courses(id)
-        );
-    ''')
-
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS enrollments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            course_id INTEGER,
-            enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id),
-            FOREIGN KEY (course_id) REFERENCES courses(id),
-            UNIQUE(user_id, course_id)
-        );
-    ''')
-
-    cursor.execute('''
+        cursor.execute('''
         CREATE TABLE IF NOT EXISTS assignments (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER,
