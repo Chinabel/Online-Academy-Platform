@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from datetime import datetime
+
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
@@ -18,6 +18,7 @@ class Course(models.Model):
 def get_due_date():
     return timezone.now() + timezone.timedelta(days=7)
 
+
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -30,11 +31,10 @@ class Assignment(models.Model):
 
 
 class Todo(models.Model):
-    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    due_date = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateTimeField(null=True, blank=True, default=timezone.now)
     is_completed = models.BooleanField(default=False)
     task = models.TextField(blank=True)
     status = models.BooleanField(default=False)
@@ -59,6 +59,7 @@ class Dictionary(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 
     def __str__(self):
         return f"Profile of {self.user.username}"

@@ -1,0 +1,7 @@
+{% load bootstrap4 %}
+
+<form method="post" class="form-horizontal">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

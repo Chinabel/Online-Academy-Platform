@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'oacademyapp',
+    'crispy_forms',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -61,11 +63,24 @@ TEMPLATES = [
     },
 ]
 
+TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'en-us'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
 WSGI_APPLICATION = 'onlineacademy.wsgi.application'
 
 # Database configuration
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://postgres:P%40%24%24w0rd@localhost:5432/onlineacademy')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'oacademy',
+        'USER': 'postgres',
+        'PASSWORD': 'P@$$w0rd',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 # Password validation and other settings
@@ -87,6 +102,8 @@ LOGGING = {
     },
 }
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Static and media files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -100,8 +117,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='your-email@gmail.com')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='your-email-password')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='christabelogugua@gmail.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='chinnylove@2019')
 
 # Rest Framework settings (if using DRF)
 REST_FRAMEWORK = {
