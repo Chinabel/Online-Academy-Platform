@@ -1,10 +1,9 @@
 from datetime import timezone
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Course, Assignment, Todo, Dictionary, Profile, Book
+from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
 from .forms import ProfileForm, TodoForm
 from django.urls import reverse
-from youtubesearchpython import VideosSearch
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -57,10 +56,10 @@ def assignment_detail(request, id):
 
     return render(request, 'assignment_detail.html', {'assignment': assignment})
 
-def youtube(request):
-    context = {'videos': get_video_data()}
+def youtube_video_list(request):
+    videos = YouTubeVideo.objects.all()
 
-    return render(request, 'youtube.html', context)
+    return render(request, 'youtube_video_list.html', {'videos': videos})
 
 
 def todo(request):
@@ -107,14 +106,6 @@ def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
     return render(request, 'book_detail.html', {'book': book})
-
-
-def dictionary(request):
-    """
-    View to display the dictionary (could be a glossary of terms).
-    """
-    words = Dictionary.objects.all()  # Assuming a 'Dictionary' model with terms
-    return render(request, 'dictionary.html', {'words': words})
 
 
 def register(request):

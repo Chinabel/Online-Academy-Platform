@@ -6,8 +6,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - Online Academy</title>
+    <title>Courses - O-Academy</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+        body {
+            background-image: url("{% static 'images/courses.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,8 +29,7 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'courses' %}">Courses</a></li>
                 <li><a href="{% url 'assignments' %}">Assignments</a></li>
-                <li><a href="{% url 'todo' %}">Go to Todo List</a>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'youtube' %}">Youtube</a></li>
             </ul>
         </nav>
     </header>
@@ -40,7 +51,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Online Academy. All rights reserved.</p>
+        <p>&copy; 2024 O-Academy. All rights reserved.</p>
     </footer>
 
 </body>

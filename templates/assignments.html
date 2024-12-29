@@ -8,8 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignments</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+        body {
+            background-image: url("{% static 'images/assignment.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'courses' %}">Courses</a></li>
+                <li><a href="{% url 'assignments' %}">Assignments</a></li>
+                <li><a href="{% url 'todo' %}">To-do List</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <h1>Assignments List</h1>
 
@@ -39,7 +62,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Online Academy</p>
+        <p>&copy; 2024 O-Academy</p>
     </footer>
 
 </body>

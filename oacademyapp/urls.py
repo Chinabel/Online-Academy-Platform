@@ -11,7 +11,7 @@ urlpatterns = [
     path('todo/<int:id>/', views.todo_detail, name='todo_detail'),  # Todo details
     path('profile/', views.profile, name='profile'),  # User profile
     path('register/', views.register, name='register'),  # User registration
-    path('youtube/', views.youtube, name='youtube'),  # YouTube page
+    path('youtube/', views.youtube_video_list, name='youtube_video_list'),  # YouTube page
     path('books/', views.book_list, name='books'),  # List of books
     path('about/', views.about, name='about'),
 ]

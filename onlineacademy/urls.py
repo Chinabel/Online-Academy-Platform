@@ -19,7 +19,6 @@ urlpatterns = [
     path('assignments/<int:assignment_id>/', views.assignment_detail, name='assignment_detail'),
     path('todo/', views.todo, name='todo'),
     path('add_todo/', views.add_todo, name='add_todo'),
-    path('dictionary/', views.dictionary, name='dictionary'),
     path('profile/', views.profile, name='profile'),
     path('youtube/', views.youtube, name='youtube'),
     path('register/', views.register, name='register'),

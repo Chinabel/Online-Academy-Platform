@@ -1,24 +1,78 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-<!-- onlineacademy/templates/onlineacademy/about.html -->
 
 <!DOCTYPE html>
 <html lang="en">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'courses' %}">Courses</a></li>
+                <li><a href="{% url 'assignments' %}">Assignments</a></li>
+                <li><a href="{% url 'books' %}">Books</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>About Our Online Academy</h1>
-    </header>
-    <main>
-        <p>Welcome to our online academy! Here you can find various courses to enhance your skills.</p>
-    </main>
-    <footer>
-        <p>&copy; 2024 Online Academy</p>
-    </footer>
+    <div class="container">
+        <h1>About Us</h1>
+
+        <p>Welcome to <strong>The O-Academy</strong>, your dedicated online learning platform that empowers students to achieve their educational goals through high-quality, interactive, and engaging courses. Whether you're just starting your learning journey or looking to enhance your skills, we are here to support you every step of the way.</p>
+
+        <p>Our mission is to make learning accessible to everyone, anywhere, and at any time. We offer a wide range of courses in diverse fields, including programming, data science, web development, business, arts, and more. Our courses are designed by industry experts, ensuring that you receive the most up-to-date knowledge and practical skills.</p>
+
+        <h2>Our Vision:</h2>
+        <p>At <strong>The O-Academy</strong>, we envision a world where anyone can access quality courses at their free time. We are passionate about helping individuals unlock their potential and achieve success.</p>
+
+        <p>We are excited to be part of your learning journey!</p>
+
+        <div class="contact-info">
+            <p>If you have any questions, feel free to contact us at <a href="mailto:[contact email]">[contact email]</a> or visit our <a href="[help center link]">help center</a>.</p>
+        </div>
+    </div>
 </body>
 </html>

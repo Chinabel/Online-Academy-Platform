@@ -48,14 +48,6 @@ class Todo(models.Model):
         return self.title
 
 
-class Dictionary(models.Model):
-    word = models.CharField(max_length=255)
-    definition = models.TextField()
-
-    def __str__(self):
-        return self.word
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
@@ -69,6 +61,16 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     description = models.TextField()
+
+    def __str__(self):
+        return self.title
+    
+class YouTubeVideo(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    url = models.URLField()
+    thumbnail_url = models.URLField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
