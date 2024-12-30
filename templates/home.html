@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O-Academy</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <style>
         body {
@@ -17,7 +16,7 @@
             background-repeat: no-repeat;
             height: 100vh;
             margin: 0;
-            color: white;
+            color: rgb(46, 46, 86);
         }
     </style>
 </head>
@@ -31,7 +30,7 @@
                 <li><a href="{% url 'courses' %}">Courses</a></li>
                 <li><a href="{% url 'assignments' %}">Assignments</a></li>
                 <li><a href="{% url 'books' %}">Books</a></li>
-                <li><a href="{% url 'youtube videos' %}">Youtube Videos</a></li>
+                <li><a href="{% url 'youtube' %}">Youtube</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
             </ul>
         </nav>

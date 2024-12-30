@@ -9,7 +9,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.oacademyapp, name='oacademyapp'),
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('', include('oacademyapp.urls')),
     path('courses/', views.courses, name='courses'),
@@ -20,10 +20,14 @@ urlpatterns = [
     path('todo/', views.todo, name='todo'),
     path('add_todo/', views.add_todo, name='add_todo'),
     path('profile/', views.profile, name='profile'),
-    path('youtube/', views.youtube_video_list, name='youtube_video_list'),
+    path('youtube/', views.youtube_video_list, name='youtube'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('register/', views.register, name='register'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('books/', views.books, name='books'),
     path('books/<int:book_id>/', views.book_detail, name='book_detail'),
 ]

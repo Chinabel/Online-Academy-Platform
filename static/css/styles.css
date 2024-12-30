@@ -45,6 +45,14 @@ nav a {
     transition: background-color 0.3s ease;
 }
 
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 nav a:hover {
     background-color: #007bff;
 }

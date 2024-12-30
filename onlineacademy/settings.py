@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'oacademyapp',
     'crispy_forms',
     'bootstrap4',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

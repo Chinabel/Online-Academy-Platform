@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
 from .forms import ProfileForm, TodoForm
 from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -109,18 +110,14 @@ def book_detail(request, book_id):
 
 
 def register(request):
-    """
-    View for user registration.
-    """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)  # Automatically log the user in after registration
-            return redirect('home')  # Redirect to home after successful registration
+            form.save()
+            messages.success(request, 'Your account has been created! You can now log in.')
+            return redirect('login')
     else:
         form = UserCreationForm()
-
     return render(request, 'register.html', {'form': form})
 
 
