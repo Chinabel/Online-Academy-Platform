@@ -189,7 +189,7 @@ button:disabled {
 
 /* Form Styles */
 form {
-    background-color: white;
+    background-color: rgb(228, 228, 248);
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

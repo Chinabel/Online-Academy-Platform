@@ -1,6 +1,6 @@
 main {
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(242, 242, 249, 0.5);
     border-radius: 10px;
     margin-top: 20px;
 }
@@ -75,7 +75,7 @@ nav a:hover {
     padding: 100px 0;
     text-align: center;
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(248, 239, 239, 0.2);
 }
 
 .hero h2 {
