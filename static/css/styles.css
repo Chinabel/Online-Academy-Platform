@@ -17,7 +17,7 @@ body {
 
 /* Header */
 header {
-    background-image: url("{% static 'images/courses.jpg' %}");
+    background-image: url("{% static 'images/books.jpg' %}");
     background-size: cover;
     background-color: rgba(0, 123, 255, 0.5);
     padding: 20px 0;

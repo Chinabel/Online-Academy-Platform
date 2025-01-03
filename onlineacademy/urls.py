@@ -8,6 +8,8 @@ from oacademyapp import views
 from django.conf.urls.static import static
 from django.conf import settings
 
+app_name = 'contact'
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
@@ -30,6 +32,8 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('books/', views.books, name='books'),
     path('books/<int:book_id>/', views.book_detail, name='book_detail'),
+    path('', views.contact, name='contact'),
+    path('success/', views.success, name='success'),
 ]
 
 if settings.DEBUG:

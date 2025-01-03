@@ -1,8 +1,10 @@
 from django import forms
-from dataclasses import fields
-from . models import *
+from dataclasses import dataclass
+from oacademyapp.models import Course, Assignment, Todo, Profile, Contact
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.utils import timezone
+
 
 class CourseForm(forms.ModelForm):
     class Meta:
@@ -52,3 +54,8 @@ class ProfileForm(forms.ModelForm):
         if len(bio) > 500:
             raise forms.ValidationError("Bio cannot be longer than 500 characters.")
         return bio
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'message']

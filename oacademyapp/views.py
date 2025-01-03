@@ -2,13 +2,15 @@ from datetime import timezone
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
-from .forms import ProfileForm, TodoForm
+from .forms import ProfileForm, TodoForm, ContactForm
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
+from django.conf import settings
 
 def oacademyapp(request):
     return render(request, 'home.html', {})
@@ -165,3 +167,25 @@ def profile(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save the contact message
+            form.save()
+
+            # Send a notification email
+            subject = "New Contact Message"
+            message = f"New message from {form.cleaned_data['name']} ({form.cleaned_data['email']}):\n\n{form.cleaned_data['message']}"
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [settings.CONTACT_EMAIL])
+
+            # Redirect to a success page
+            return redirect('contact:success')
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact/contact.html', {'form': form})
+
+def success(request):
+    return render(request, 'contact/success.html')

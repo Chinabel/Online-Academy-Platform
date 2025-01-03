@@ -123,6 +123,8 @@ EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='oacademy@gmail.com')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='chinnylove@2019')
+DEFAULT_FROM_EMAIL = 'oacademy@gmail.com'
+CONTACT_EMAIL = 'oacademy@gmail.com'
 
 # Rest Framework settings (if using DRF)
 REST_FRAMEWORK = {
