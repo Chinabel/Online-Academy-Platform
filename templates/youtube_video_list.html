@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Videos</title>
-    <link rel="stylesheet" href="styles.css">
 
     <style>
         body {
@@ -19,9 +18,51 @@
             margin: 0;
             color: rgb(38, 41, 104);
         }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(38, 41, 104);
+        }
+
+        .video-container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .video-item {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .video-thumbnail {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="video-container">
         <h1>Our YouTube Videos</h1>
         <div class="video-list">

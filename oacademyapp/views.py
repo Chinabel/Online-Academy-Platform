@@ -59,8 +59,9 @@ def assignment_detail(request, id):
 
 def youtube_video_list(request):
     videos = YouTubeVideo.objects.all()
+    context = {'videos': videos}
 
-    return render(request, 'youtube_video_list.html', {'videos': videos})
+    return render(request, 'youtube_video_list.html', context)
 
 
 def todo(request):

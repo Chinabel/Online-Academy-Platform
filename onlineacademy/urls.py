@@ -31,3 +31,6 @@ urlpatterns = [
     path('books/', views.books, name='books'),
     path('books/<int:book_id>/', views.book_detail, name='book_detail'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
