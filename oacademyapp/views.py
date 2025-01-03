@@ -34,7 +34,7 @@ def courses(request):
     View to list all available courses.
     """
     course_list = Course.objects.all()
-    return render(request, 'courses.html', {'courses': course_list})
+    return render(request, 'course_list.html', {'courses': course_list})
 
 def course_list(request):
     courses = Course.objects.all()
@@ -46,6 +46,7 @@ def course_detail(request, course_id):
     return render(request, 'course_detail.html', {'course': course})
 
 
+@login_required(login_url='/login/')
 def assignments(request):
     """
     View to list all assignments.
@@ -66,10 +67,11 @@ def youtube_video_list(request):
     return render(request, 'youtube_video_list.html', context)
 
 
+@login_required(login_url='/login/')
 def todo(request):
-    """
-    View to manage and display to-do items for the logged-in user.
-    """
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to the login page if the user is not authenticated
+    
     todo_list = Todo.objects.filter(user=request.user)
     return render(request, 'todo.html', {'todos': todo_list})
 
@@ -100,7 +102,7 @@ def books(request):
     View to list all books available in the academy.
     """
     book_list = Book.objects.all()
-    return render(request, 'book.html', {'books': book_list})
+    return render(request, 'book_list.html', {'books': book_list})
 
 def book_list(request):
     books = Book.objects.all()
