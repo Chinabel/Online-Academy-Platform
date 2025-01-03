@@ -17,7 +17,9 @@ body {
 
 /* Header */
 header {
-    background-color: #007bff;
+    background-image: url("{% static 'images/courses.jpg' %}");
+    background-size: cover;
+    background-color: rgba(0, 123, 255, 0.5);
     padding: 20px 0;
     color: white;
     text-align: center;
