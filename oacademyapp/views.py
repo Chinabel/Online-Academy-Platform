@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils import translation
+from django.utils.translation import gettext as _
 
 def oacademyapp(request):
     return render(request, 'home.html', {})
@@ -46,7 +48,6 @@ def course_detail(request, course_id):
     return render(request, 'course_detail.html', {'course': course})
 
 
-@login_required(login_url='/login/')
 def assignments(request):
     """
     View to list all assignments.
@@ -67,7 +68,6 @@ def youtube_video_list(request):
     return render(request, 'youtube_video_list.html', context)
 
 
-@login_required(login_url='/login/')
 def todo(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Redirect to the login page if the user is not authenticated
@@ -191,3 +191,14 @@ def contact(request):
 
 def success(request):
     return render(request, 'contact/success.html')
+
+
+def set_language(request, lang_code):
+    if lang_code in dict(settings.LANGUAGES):
+        translation.activate(lang_code)
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
+        response = redirect(request.META.get('HTTP_REFERER')) 
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
+        return response
+    else:
+        return redirect('/')

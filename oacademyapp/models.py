@@ -2,12 +2,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
+    name = models.CharField(max_length=255, verbose_name=_("Course Name"))
+    description = models.TextField(verbose_name=_("Course Description"))
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

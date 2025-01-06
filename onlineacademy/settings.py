@@ -4,11 +4,9 @@ from pathlib import Path
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 
-# Initialize environment variables
 env = environ.Env()
-environ.Env.read_env()  # Automatically reads the .env file if it exists
+environ.Env.read_env()
 
-# Print DATABASE_URL to verify it is being loaded
 print(env('DATABASE_URL'))
 
 SECRET_KEY = env('SECRET_KEY')
@@ -45,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'onlineacademy.urls'
@@ -65,11 +64,23 @@ TEMPLATES = [
     },
 ]
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    ('fr', 'French'),
+    ('de', 'German'),
+    ('pt', 'Portuguese'),
+]
+
 TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 WSGI_APPLICATION = 'onlineacademy.wsgi.application'
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the O-Academy</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Add your stylesheets here -->
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/courses/">Courses</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/login/">Login</a></li>
+                <li><a href="/register/">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <section class="hero">
+            <h1>Welcome to The O- Academy</h1>
+            <p>Start learning today with our wide range of courses!</p>
+            <a href="/courses/" class="btn btn-primary">Browse Courses</a>
+        </section>
+
+        <section class="featured-courses">
+            <h2>Featured Courses</h2>
+            <div class="course-list">
+                {% for item in items %}
+                    <div class="course-card">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.description }}</p>
+                        <a href="{% url 'course_detail' item.id %}" class="btn btn-secondary">Learn More</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>About O-Academy</h2>
+            <p>We offer online courses for students who want to expand their knowledge and skills. Join our community of passionate learners.</p>
+            <a href="/about/" class="btn btn-primary">Learn More About Us</a>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 O-Academy. All rights reserved.</p>
+    </footer>
+
+    <!-- Add your scripts here -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>
