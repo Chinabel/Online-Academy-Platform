@@ -13,9 +13,9 @@ SECRET_KEY = env('SECRET_KEY')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'onlineacademy.settings'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = True
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'django_extensions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -44,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'onlineacademy.urls'
@@ -59,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'allauth.socialaccount.context_processors.socialaccount',
             ],
         },
     },
@@ -104,6 +110,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Default Django backend
+)
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GOOGLE_CLIENT_ID = '321436175669-p9kh5uohnoms3sbltlk1qogofinu4vgk.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_SECRET = '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'
+
+
+# You can define the login URL if needed (optional)
+LOGIN_REDIRECT_URL = '/'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -118,6 +138,7 @@ LOGGING = {
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static and media files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",

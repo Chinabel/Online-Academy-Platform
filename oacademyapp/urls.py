@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 
 app_name = 'oacademyapp'
@@ -19,4 +19,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),  # Contact page
     path('success/', views.success, name='success'),  # Success page
     path('set_language/<str:lang_code>/', views.set_language, name='set_language'),
+    path('accounts/', include('allauth.urls')),
 ]

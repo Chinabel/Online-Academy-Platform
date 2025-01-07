@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
@@ -43,6 +44,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn">Login</button>
+                <a href="{% provider_login_url 'google' %}">Login with Google</a>
             </div>
         </form>
 

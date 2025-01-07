@@ -134,7 +134,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            next_url = request.GET.get('next', 'home')  # Redirect to 'next' URL after login
+            next_url = request.GET.get('next', 'home')
             return redirect(next_url)
         else:
             return HttpResponse("Invalid credentials", status=401)
@@ -154,7 +154,7 @@ def profile(request):
     try:
         user_profile = request.user.profile
     except ObjectDoesNotExist:
-        return redirect('create_profile')
+        return redirect('register')
     
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user.profile)
@@ -165,7 +165,6 @@ def profile(request):
         form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'profile.html', {'form': form})
-
 
 def about(request):
     return render(request, 'about.html')
