@@ -118,14 +118,18 @@ def book_detail(request, book_id):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('profile')  # Redirect to the profile page if logged in
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been created! You can now log in.')
-            return redirect('login')
+            user = form.save()
+            login(request, user)
+            return redirect('profile')  # Redirect to profile after successful registration
     else:
         form = UserCreationForm()
+
     return render(request, 'register.html', {'form': form})
 
 
@@ -177,13 +181,15 @@ def profile_completion(request):
     else:
         form = ProfileForm()
 
-    return render(request, 'profile_completion.html', {'form': form})
+    return render(request, 'profile.html', {'form': form})
 
 def logout_view(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect('oacademyapp:home')
-    return HttpResponseForbidden("Forbidden: Logout can only be done via POST request.")
+    logout(request)
+    messages.info(request, 'You have successfully logged out.')
+    return redirect('logged_out')
+
+def logged_out(request):
+    return render(request, 'logged_out.html')
 
 def about(request):
     return render(request, 'about.html')

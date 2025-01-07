@@ -191,7 +191,7 @@ main {
     margin-bottom: 10px;
 }
 
-/* Button Styles */
+/* Button Styles - Global */
 button {
     background-color: #007bff;
     color: white;
@@ -216,27 +216,47 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Form Styles */
-form {
-    background-color: rgb(228, 228, 248);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+/* Form Styles for Logout Button - Scoped to .logout-form */
+.logout-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
 }
 
-form input, form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
+.logout-form button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: rgb(241, 241, 244);
+    color: blue;
+    border: none;
     border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 1rem;
-    outline: none;
+    cursor: pointer;
 }
 
-form input:focus, form textarea:focus {
-    border-color: #007bff;
+/* Apply hover effect only to logout form button */
+.logout-form button:hover {
+    background-color: rgb(31, 45, 177);
+}
+
+/* Contact Form - Scoped Styles */
+.contact-form button {
+    background-color: #28a745;
+    padding: 12px 24px;
+}
+
+.contact-form button:hover {
+    background-color: #218838;
+}
+
+/* Register Form - Scoped Styles */
+.register-form button {
+    background-color: #ffc107;
+    padding: 12px 24px;
+}
+
+.register-form button:hover {
+    background-color: #e0a800;
 }
 
 /* Footer */

@@ -1,6 +1,5 @@
 from django.urls import include, path
-from django.contrib.auth.views import LogoutView, LoginView
-from .views import logout_view
+from .views import logout_view, login_view
 from . import views
 
 app_name = 'oacademyapp'
@@ -16,8 +15,9 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),  # User profile
     path('profile/complete/', views.profile_completion, name='profile_completion'),
     path('register/', views.register, name='register'),  # User registration
-    path('login/', LoginView.as_view(), name='login'),  # Login page
-    path('logout/', logout_view, name='logout'),
+    path('login/', login_view, name='login'),  # Login page
+    path('logout/', views.logout_view, name='logout'),
+    path('logged-out/', views.logged_out, name='logged_out'),
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
     path('books/', views.book_list, name='books'),  # List of books
     path('about/', views.about, name='about'),  # About page

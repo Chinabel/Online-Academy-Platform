@@ -11,6 +11,8 @@
 <body>
 
     <header>
+        <div class="container">
+            <h1>My Profile</h1>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
@@ -22,19 +24,16 @@
     </header>
 
     <main>
-        <h1>Your Profile</h1>
+        <h1><u>Profile</u></h1>
 
         <!-- Display current user details -->
         <p><strong>Username:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Joined on:</strong> {{ user.date_joined }}</p>
 
+        <br><br>
         <!-- Profile Form for updating bio -->
-        <h2>Update Your Bio</h2>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            
+        <h2><u>Update Your Bio</u></h2>         
             <div>
                 <label for="id_bio">Bio:</label>
                 {{ form.bio }}
@@ -46,7 +45,7 @@
                     </ul>
                 {% endif %}
             </div>
-        
+      
             <div>
                 <label for="id_profile_picture">Profile Picture:</label>
                 {{ form.profile_picture }}
@@ -58,7 +57,7 @@
                     </ul>
                 {% endif %}
             </div>
-        
+
             <button type="submit">Save Changes</button>
         </form>
     </main>

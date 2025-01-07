@@ -11,25 +11,25 @@
 
     <style>
         body {
-            position: relative;
-            background-image: url("{% static 'images/books.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            margin: 0;
-            color: rgb(242, 242, 245);
+          position: relative;
+          background-image: url("{% static 'images/courses.jpg' %}");
+          background-size: cover;
+          background-position: center center; 
+          background-repeat: no-repeat;
+          height: 100vh;
+          margin: 0;
+          color: rgb(242, 242, 245); 
         }
 
         body::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: -1; 
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0); 
+          z-index: -1; 
         }
     </style>
 </head>
@@ -38,6 +38,10 @@
     <header>
         <div class="container">
             <h1>The O-Academy</h1>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
@@ -47,7 +51,8 @@
                     <li><a href="{% url 'youtube' %}">Youtube</a></li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    </form>
                 </ul>
             </nav>
         </div>
@@ -58,7 +63,6 @@
             <center><h1>Welcome to the O-Academy</h1></center>
             <p>Start learning today with our wide range of courses!</p>
         </section>
-        <br><br>
         <br><br>
         <section>
             <h2>Featured Courses</h2>
