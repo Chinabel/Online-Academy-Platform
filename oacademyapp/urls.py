@@ -14,6 +14,7 @@ urlpatterns = [
     path('todo/', views.todo_list, name='todos'),  # Todo list
     path('todo/<int:id>/', views.todo_detail, name='todo_detail'),  # Todo details
     path('profile/', views.profile, name='profile'),  # User profile
+    path('profile/complete/', views.profile_completion, name='profile_completion'),
     path('register/', views.register, name='register'),  # User registration
     path('login/', LoginView.as_view(), name='login'),  # Login page
     path('logout/', logout_view, name='logout'),

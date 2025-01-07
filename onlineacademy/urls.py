@@ -18,6 +18,7 @@ urlpatterns = [
     path('todo/', views.todo, name='todo'),  # Todo list
     path('add_todo/', views.add_todo, name='add_todo'),  # Add todo
     path('profile/', views.profile, name='profile'),  # Profile page
+    path('profile/complete/', views.profile_completion, name='profile_completion'),
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
     path('login/', LoginView.as_view(), name='login'),  # Login page
     path('logout/', logout_view, name='logout'),

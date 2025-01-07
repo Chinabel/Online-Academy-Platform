@@ -2,7 +2,7 @@ from datetime import timezone
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
-from .forms import ProfileForm, TodoForm, ContactForm
+from .forms import ProfileForm, TodoForm, ContactForm, ProfileForm
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -153,17 +153,31 @@ def profile(request):
     try:
         user_profile = request.user.profile
     except ObjectDoesNotExist:
-        return redirect('register')
+        return redirect('profile_completion')
     
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirect to the profile page after saving the form
+            return redirect('profile')
     else:
         form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'profile.html', {'form': form})
+
+@login_required
+def profile_completion(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm()
+
+    return render(request, 'profile_completion.html', {'form': form})
 
 def logout_view(request):
     if request.method == "POST":
