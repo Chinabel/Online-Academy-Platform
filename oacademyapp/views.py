@@ -137,21 +137,18 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            next_url = request.GET.get('next', 'home')
-            return redirect(next_url)
+            
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect(reverse('oacademyapp:profile'))
         else:
             return HttpResponse("Invalid credentials", status=401)
         
     return render(request, 'login.html')
 
-
-def logout_view(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect('oacademyapp:home')
-    return HttpResponseForbidden("Forbidden: Logout can only be done via POST request.")
-
-@login_required(login_url='/login/')
+@login_required
 def profile(request):
     try:
         user_profile = request.user.profile
@@ -167,6 +164,12 @@ def profile(request):
         form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'profile.html', {'form': form})
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('oacademyapp:home')
+    return HttpResponseForbidden("Forbidden: Logout can only be done via POST request.")
 
 def about(request):
     return render(request, 'about.html')

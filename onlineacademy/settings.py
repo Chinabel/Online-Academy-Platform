@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oacademy',
         'USER': 'postgres',
-        'PASSWORD': P@$$w0rd,
+        'PASSWORD': 'P@$$w0rd',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -120,7 +120,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # Default Django backend
 )
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile/'
 
 SITE_ID = 1
 

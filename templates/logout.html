@@ -9,9 +9,8 @@
     <title>Logged Out - O-Academy</title>
 </head>
 <body>
-    <!-- Use POST method for logout action -->
-    <form method="POST" action="{% url 'oacademyapp:logout' %}">
-        {% csrf_token %}
+
+    <form action="/logout" method="POST">
         <button type="submit">Logout</button>
     </form>
     
