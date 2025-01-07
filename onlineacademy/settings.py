@@ -3,9 +3,12 @@ import environ
 from pathlib import Path
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
 
 env = environ.Env()
 environ.Env.read_env()
+
+load_dotenv()
 
 print(env('DATABASE_URL'))
 
@@ -98,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oacademy',
         'USER': 'postgres',
-        'PASSWORD': 'P@$$w0rd',
+        'PASSWORD': os.getenv('PASSWORD')
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -122,7 +125,7 @@ LOGIN_REDIRECT_URL = '/'
 SITE_ID = 1
 
 SOCIAL_AUTH_GOOGLE_CLIENT_ID = '321436175669-p9kh5uohnoms3sbltlk1qogofinu4vgk.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_SECRET')
 
 
 # You can define the login URL if needed (optional)
