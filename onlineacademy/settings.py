@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oacademy',
         'USER': 'postgres',
-        'PASSWORD': os.getenv('PASSWORD')
+        'PASSWORD': os.getenv('PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
