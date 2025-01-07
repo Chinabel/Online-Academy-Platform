@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'cms',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'allauth.socialaccount.context_processors.socialaccount',
+                #'allauth.socialaccount.context_processors.socialaccount',
             ],
         },
     },
@@ -117,6 +119,8 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = '/'
 
+SITE_ID = 1
+
 SOCIAL_AUTH_GOOGLE_CLIENT_ID = '321436175669-p9kh5uohnoms3sbltlk1qogofinu4vgk.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_SECRET = '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'
 
@@ -144,7 +148,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

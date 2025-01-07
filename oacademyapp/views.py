@@ -1,5 +1,5 @@
 from datetime import timezone
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
 from .forms import ProfileForm, TodoForm, ContactForm
@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import translation
 from django.utils.translation import gettext as _
+from django.views.decorators.http import require_GET
 
 def oacademyapp(request):
     return render(request, 'home.html', {})
@@ -48,6 +49,7 @@ def course_detail(request, course_id):
     return render(request, 'course_detail.html', {'course': course})
 
 
+@login_required(login_url='/login/')
 def assignments(request):
     """
     View to list all assignments.
@@ -68,12 +70,13 @@ def youtube_video_list(request):
     return render(request, 'youtube_video_list.html', context)
 
 
+@login_required(login_url='/login/')
 def todo(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Redirect to the login page if the user is not authenticated
     
     todo_list = Todo.objects.filter(user=request.user)
-    return render(request, 'todo.html', {'todos': todo_list})
+    return render(request, 'todo_list.html', {'todos': todo_list})
 
 
 def todo_list(request):
@@ -143,11 +146,10 @@ def login_view(request):
 
 
 def logout_view(request):
-    """
-    View to handle user logout.
-    """
-    logout(request)
-    return redirect('home')
+    if request.method == "POST":
+        logout(request)
+        return redirect('oacademyapp:home')
+    return HttpResponseForbidden("Forbidden: Logout can only be done via POST request.")
 
 @login_required(login_url='/login/')
 def profile(request):

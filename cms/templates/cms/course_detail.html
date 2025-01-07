@@ -1,0 +1,19 @@
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+
+<h2>Reviews</h2>
+{% for review in reviews %}
+    <div>
+        <strong>{{ review.user.username }}</strong> - {{ review.rating }} Stars
+        <p>{{ review.comment }}</p>
+    </div>
+{% empty %}
+    <p>No reviews yet.</p>
+{% endfor %}
+
+<h3>Leave a Review</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+</form>

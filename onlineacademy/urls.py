@@ -3,11 +3,13 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from oacademyapp import views
 from django.conf import settings
+from django.contrib.auth.views import LogoutView, LoginView
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home view
     path('admin/', admin.site.urls),
+    path('cms/', include('cms.urls')),
     path('courses/', views.courses, name='courses'),  # List of courses
     path('courses/<int:course_id>/', views.course_detail, name='course_detail'),  # Course details
     path('assignments/', views.assignments, name='assignments'),  # List of assignments
@@ -16,8 +18,8 @@ urlpatterns = [
     path('add_todo/', views.add_todo, name='add_todo'),  # Add todo
     path('profile/', views.profile, name='profile'),  # Profile page
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # Login page
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),  # Logout page
+    path('login/', LoginView.as_view(), name='login'),  # Login page
+    path('logout/', LogoutView.as_view(next_page='oacademyapp:home'), name='logout'),
     path('register/', views.register, name='register'),  # Register page
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),  # Password reset
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
