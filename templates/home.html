@@ -1,79 +1,7 @@
-{% load static %}
+{% extends "base.html" %}
 {% load i18n %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <title>The O-Academy</title>
-
-    <style>
-        body {
-          position: relative;
-          background-image: url("{% static 'images/courses.jpg' %}");
-          background-size: cover;
-          background-position: center center; 
-          background-repeat: no-repeat;
-          height: 100vh;
-          margin: 0;
-          color: rgb(242, 242, 245); 
-        }
-
-        body::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0); 
-          z-index: -1; 
-        }
-    </style>
-</head>
-<body>
-
-    <div class="language-selector">
-        <form method="post" action="{% url 'set_language' %}">
-            {% csrf_token %}
-            <select name="language" onchange="this.form.submit()">
-                {% for code, name in LANGUAGES %}
-                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ name }}
-                    </option>
-                {% endfor %}
-            </select>
-        </form>
-    </div>
-
-    <form action="/logout" method="POST" class="logout-form">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-
-    <header>
-        <div class="container">
-            <h1>The O-Academy</h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'courses' %}">Courses</a></li>
-                    <li><a href="{% url 'books' %}">Books</a></li>
-                    <li><a href="{% url 'youtube' %}">Youtube</a></li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
-                    </form>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
+    {% block content %}
         <section>
             <center><h1>{% trans "Welcome to the O-Academy" %}</h1></center>
             <p>{% trans "Start learning today with our wide range of courses!" %}</p>
@@ -108,18 +36,4 @@
                 {% endfor %}
             </ul>
         </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 O-Academy. All rights reserved.</p>
-            <p>Follow us on:
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            </p>
-        </div>
-    </footer>
-
-</body>
-</html>
+    {% endblock %}

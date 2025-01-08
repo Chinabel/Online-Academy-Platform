@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
-    'django.contrib.auth.backends.ModelBackend',  # Default Django backend
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 LOGIN_REDIRECT_URL = '/profile/'

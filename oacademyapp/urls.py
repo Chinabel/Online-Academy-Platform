@@ -31,7 +31,6 @@ urlpatterns = [
     path('set_language/', set_language, name='set_language'),
     path('accounts/', include('allauth.urls')),
 ]+ i18n_patterns(
-    path('set_language/', set_language, name='set_language'),
     path('', views.home, name='home'),
     path('cms/', include('cms.urls')),
     path('courses/', views.courses, name='courses'),

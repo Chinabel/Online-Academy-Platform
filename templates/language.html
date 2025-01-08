@@ -2,31 +2,33 @@
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Language Switcher</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="language-switcher">
-        <label for="language-dropdown">Select Language: </label>
-        <select id="language-dropdown" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="pt">Portugues</option>
-        </select>
-    </div>
+    <!-- Language Switcher Form -->
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <div class="language-switcher">
+            <label for="language-dropdown">Select Language: </label>
+            <select id="language-dropdown" name="language" onchange="this.form.submit()">
+                {% for lang_code, lang_name in LANGUAGES %}
+                    <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
 
     <div class="content">
-        <h1 id="greeting">Hello!</h1>
-        <p id="message">Welcome to The O-Academy!</p>
+        <h1>{% trans "Hello!" %}</h1>
+        <p>{% trans "Welcome to The O-Academy!" %}</p>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
-

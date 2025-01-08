@@ -1,3 +1,4 @@
+import logging
 from datetime import timezone
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
@@ -215,11 +216,13 @@ def success(request):
     return render(request, 'contact/success.html')
 
 
+logger = logging.getLogger(__name__)
+
 def set_language(request, lang_code):
     if lang_code in dict(settings.LANGUAGES):
         translation.activate(lang_code)
         request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
-        response = redirect(request.META.get('HTTP_REFERER')) 
+        response = redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the page they were on
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
         return response
     else:
