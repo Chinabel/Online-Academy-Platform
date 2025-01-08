@@ -33,6 +33,9 @@
           z-index: -1; 
         }
     </style>
+</head>
+<body>
+
     <div class="language-selector">
         <form method="post" action="{% url 'set_language' %}">
             {% csrf_token %}
@@ -45,8 +48,6 @@
             </select>
         </form>
     </div>
-</head>
-<body>
 
     <form action="/logout" method="POST" class="logout-form">
         {% csrf_token %}
