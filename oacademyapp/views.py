@@ -149,7 +149,7 @@ def login_view(request):
         else:
             return HttpResponse("Invalid credentials", status=401)
         
-    return render(request, 'login.html')
+    return render(request, 'registration/login.html')
 
 @login_required
 def profile(request):

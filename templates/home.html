@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
@@ -32,6 +33,18 @@
           z-index: -1; 
         }
     </style>
+    <div class="language-selector">
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+            <select name="language" onchange="this.form.submit()">
+                {% for code, name in LANGUAGES %}
+                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
 </head>
 <body>
 
@@ -61,12 +74,12 @@
 
     <main>
         <section>
-            <center><h1>Welcome to the O-Academy</h1></center>
-            <p>Start learning today with our wide range of courses!</p>
+            <center><h1>{% trans "Welcome to the O-Academy" %}</h1></center>
+            <p>{% trans "Start learning today with our wide range of courses!" %}</p>
         </section>
         <br><br>
         <section>
-            <h2>Featured Courses</h2>
+            <h2>{% trans "Featured Courses" %}</h2>
             <ul>
                 {% for course in courses %}
                     <li>
@@ -76,13 +89,13 @@
                         </a>
                     </li>
                 {% empty %}
-                    <li>No courses available yet.</li>
+                    <li>{% trans "No courses available yet." %}</li>
                 {% endfor %}
             </ul>
         </section>
         <br><br>
         <section>
-            <h2>Upcoming Assignments</h2>
+            <h2>{% trans "Upcoming Assignments" %}</h2>
             <ul>
                 {% for assignment in assignments %}
                     <li>
@@ -90,7 +103,7 @@
                         <p>Due: {{ assignment.due_date }}</p>
                     </li>
                 {% empty %}
-                    <li>No assignments due at the moment.</li>
+                    <li>{% trans "No assignments due at the moment." %}</li>
                 {% endfor %}
             </ul>
         </section>

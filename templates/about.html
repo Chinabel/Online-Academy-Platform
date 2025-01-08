@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
@@ -26,15 +27,15 @@
     </header>
 
     <div class="container">
-        <p>Welcome to <strong>The O-Academy</strong>, your dedicated online learning platform that empowers students to achieve their educational goals through high-quality, interactive, and engaging courses. Whether you're just starting your learning journey or looking to enhance your skills, we are here to support you every step of the way.</p>
+        <p>{% trans "Welcome to <strong>The O-Academy</strong>, your dedicated online learning platform that empowers students to achieve their educational goals through high-quality, interactive, and engaging courses. Whether you're just starting your learning journey or looking to enhance your skills, we are here to support you every step of the way." %}</p>
         <br><br>
-        <h2><u>Our mission:</u></h2>
-        <p>To make learning accessible to everyone, anywhere, and at any time. We offer a wide range of courses in diverse fields, including programming, data science, web development, business, arts, and more. Our courses are designed by industry experts, ensuring that you receive the most up-to-date knowledge and practical skills.</p>
+        <h2><u>{% trans "Our mission:" %}</u></h2>
+        <p>{% trans "To make learning accessible to everyone, anywhere, and at any time. We offer a wide range of courses in diverse fields, including programming, data science, web development, business, arts, and more. Our courses are designed by industry experts, ensuring that you receive the most up-to-date knowledge and practical skills." %}</p>
         <br><br>
-        <h2><u>Our Vision:</u></h2>
-        <p>At <strong>The O-Academy</strong>, we envision a world where anyone can access quality courses at their free time. We are passionate about helping individuals unlock their potential and achieve success.</p>
+        <h2><u>{% trans "Our Vision:" %}</u></h2>
+        <p>{% trans "At <strong>The O-Academy</strong>, we envision a world where anyone can access quality courses at their free time. We are passionate about helping individuals unlock their potential and achieve success." %}</p>
 
-        <p>We are excited to be part of your learning journey!</p>
+        <p>{% trans "We are excited to be part of your learning journey!" %}</p>
         <br><br>
         <div class="contact-info">
             <p>If you have any questions, feel free to contact us at <a href="mailto:support@theoacademy.com">support@theoacademy.com</a> or visit our <a href="/help-center">help center</a>.</p>

@@ -4,9 +4,10 @@ from django.contrib.auth import views as auth_views
 from oacademyapp import views
 from django.conf import settings
 from django.contrib.auth.views import LogoutView, LoginView
-from oacademyapp.views import logout_view
+from oacademyapp.views import login_view, logout_view
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from django.views.i18n import set_language
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home view
@@ -21,7 +22,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),  # Profile page
     path('profile/complete/', views.profile_completion, name='profile_completion'),
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
-    path('login/', LoginView.as_view(), name='login'),  # Login page
+    path('login/', login_view, name='login'),  # Login page
     path('logout/', views.logout_view, name='logout'),
     path('logout', views.logout_view, name='logout_no_slash'),
     path('logged-out/', views.logged_out, name='logged_out'),
@@ -35,9 +36,26 @@ urlpatterns = [
     path('about/', views.about, name='about'),  # About page
     path('contact/', views.contact, name='contact'),  # Contact page
     path('success/', views.success, name='success'),  # Success page
-    path('set_language/<str:lang_code>/', views.set_language, name='set_language'),
+    path('set_language/', set_language, name='set_language'),
     path('accounts/', include('allauth.urls')),
-]
+]+ i18n_patterns(
+    path('set_language/', set_language, name='set_language'),
+    path('', views.home, name='home'),
+    path('admin/', admin.site.urls),
+    path('cms/', include('cms.urls')),
+    path('courses/', views.courses, name='courses'),
+    path('assignments/', views.assignments, name='assignments'),
+    path('todo/', views.todo, name='todo'),
+    path('profile/', views.profile, name='profile'),
+    path('youtube/', views.youtube_video_list, name='youtube'),
+    path('login/', login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register, name='register'),
+    path('books/', views.books, name='books'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('accounts/', include('allauth.urls')),
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
