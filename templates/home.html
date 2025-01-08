@@ -35,13 +35,14 @@
 </head>
 <body>
 
+    <form action="/logout" method="POST" class="logout-form">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
     <header>
         <div class="container">
             <h1>The O-Academy</h1>
-            <form action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
@@ -96,7 +97,14 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 O-Academy. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 O-Academy. All rights reserved.</p>
+            <p>Follow us on:
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </p>
+        </div>
     </footer>
 
 </body>

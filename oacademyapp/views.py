@@ -49,14 +49,13 @@ def course_detail(request, course_id):
     return render(request, 'course_detail.html', {'course': course})
 
 
-@login_required(login_url='/login/')
+@login_required
 def assignments(request):
     """
     View to list all assignments.
     """
     assignment_list = Assignment.objects.all()
     return render(request, 'assignments.html', {'assignments': assignment_list})
-
 
 def assignment_detail(request, id):
     assignment = get_object_or_404(Assignment, id=id)
@@ -70,7 +69,7 @@ def youtube_video_list(request):
     return render(request, 'youtube_video_list.html', context)
 
 
-@login_required(login_url='/login/')
+@login_required
 def todo(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Redirect to the login page if the user is not authenticated
@@ -146,7 +145,7 @@ def login_view(request):
             if next_url:
                 return redirect(next_url)
             else:
-                return redirect(reverse('oacademyapp:profile'))
+                return redirect(reverse('profile'))
         else:
             return HttpResponse("Invalid credentials", status=401)
         
@@ -185,8 +184,7 @@ def profile_completion(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, 'You have successfully logged out.')
-    return redirect('logged_out')
+    return render(request, 'logout.html', {'logged_out': True})
 
 def logged_out(request):
     return render(request, 'logged_out.html')

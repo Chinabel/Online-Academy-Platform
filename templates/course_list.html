@@ -41,7 +41,6 @@
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'courses' %}">Courses</a></li>
                 <li><a href="{% url 'assignments' %}">Assignments</a></li>
                 <li><a href="{% url 'todo' %}">To-do List</a></li>
                 <li><a href="{% url 'youtube' %}">Youtube</a></li>
@@ -71,7 +70,14 @@
     </video>
 
     <footer>
-        <p>&copy; 2024 O-Academy. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 O-Academy. All rights reserved.</p>
+            <p>Follow us on:
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </p>
+        </div>
     </footer>
 
 </body>

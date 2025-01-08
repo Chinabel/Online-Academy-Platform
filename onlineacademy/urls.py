@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.views import LogoutView, LoginView
 from oacademyapp.views import logout_view
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('', views.home, name='home'),  # Home view
@@ -21,7 +22,9 @@ urlpatterns = [
     path('profile/complete/', views.profile_completion, name='profile_completion'),
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
     path('login/', LoginView.as_view(), name='login'),  # Login page
-    path('logout/', logout_view, name='logout'),
+    path('logout/', views.logout_view, name='logout'),
+    path('logout', views.logout_view, name='logout_no_slash'),
+    path('logged-out/', views.logged_out, name='logged_out'),
     path('register/', views.register, name='register'),  # Register page
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),  # Password reset
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

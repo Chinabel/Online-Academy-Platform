@@ -17,6 +17,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),  # User registration
     path('login/', login_view, name='login'),  # Login page
     path('logout/', views.logout_view, name='logout'),
+    path('logout', views.logout_view, name='logout_no_slash'),
     path('logged-out/', views.logged_out, name='logged_out'),
     path('youtube/', views.youtube_video_list, name='youtube'),  # YouTube page
     path('books/', views.book_list, name='books'),  # List of books

@@ -10,6 +10,17 @@
     <meta name="description" content="The O-Academy offers a variety of online courses to help you grow and succeed in your career.">
     <title>{% block title %}O-Academy{% endblock %}</title>
 
+    <form method="post" action="{% url 'set_language' %}">
+        {% csrf_token %}
+        <select name="language" onchange="this.form.submit()">
+            {% for code, name in LANGUAGES %}
+                <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
+                    {{ name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
     <!-- Linking Bootstrap CSS via CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
