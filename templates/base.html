@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +15,31 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
+    <style>
         body {
-          position: relative;
-          background-image: url("{% static 'images/courses.jpg' %}");
-          background-size: cover;
-          background-position: center center; 
-          background-repeat: no-repeat;
-          height: 100vh;
-          margin: 0;
-          color: rgb(242, 242, 245); 
+            position: relative;
+            background-image: url("{% static 'images/courses.jpg' %}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            color: rgb(242, 242, 245);
         }
 
         body::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(250, 245, 245, 0); 
-          z-index: -1; 
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(250, 245, 245, 0);
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-
 
     <div class="language-selector">
         <form method="post" action="{% url 'set_language' %}">
@@ -54,17 +53,6 @@
             </select>
         </form>
     </div>
-
-    <script>
-        function changeLanguage() {
-            const language = document.getElementById('language-dropdown').value;
-            const currentUrl = window.location.href;
-    
-            const newUrl = currentUrl.replace(/^\/[a-z]{2}\//, `/${language}/`);
-
-            window.location.href = newUrl;
-        }
-    </script>
 
     <form action="/logout" method="POST" class="logout-form">
         {% csrf_token %}
