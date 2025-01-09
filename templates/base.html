@@ -15,7 +15,7 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+<style>
         body {
           position: relative;
           background-image: url("{% static 'images/courses.jpg' %}");
@@ -34,23 +34,37 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: rgba(0, 0, 0, 0.4); 
+          background-color: rgba(250, 245, 245, 0); 
           z-index: -1; 
         }
     </style>
 </head>
 <body>
-    <!-- Language dropdown form -->
-    <form action="{% url 'set_language' %}" method="post" class="language-selector">
-        {% csrf_token %}
-        <select name="language" onchange="this.form.submit()">
-            {% for lang_code, lang_name in LANGUAGES %}
-                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
-                    {{ lang_name }}
-                </option>
-            {% endfor %}
-        </select>
-    </form>
+
+
+    <div class="language-selector">
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+            <select name="language" onchange="this.form.submit()">
+                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                <option value="es" {% if LANGUAGE_CODE == 'es' %}selected{% endif %}>Español</option>
+                <option value="pt" {% if LANGUAGE_CODE == 'pt' %}selected{% endif %}>Português</option>
+                <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>Deutsch</option>
+                <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
+            </select>
+        </form>
+    </div>
+
+    <script>
+        function changeLanguage() {
+            const language = document.getElementById('language-dropdown').value;
+            const currentUrl = window.location.href;
+    
+            const newUrl = currentUrl.replace(/^\/[a-z]{2}\//, `/${language}/`);
+
+            window.location.href = newUrl;
+        }
+    </script>
 
     <form action="/logout" method="POST" class="logout-form">
         {% csrf_token %}
@@ -68,7 +82,7 @@
                 <a href="{% url 'youtube' %}">Youtube</a>
                 <a href="{% url 'profile' %}">Profile</a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                 {% else %}
                     <a href="{% url 'register' %}">Register</a>
                     <a href="{% url 'contact' %}">Contact</a>

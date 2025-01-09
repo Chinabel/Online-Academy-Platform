@@ -1,7 +1,7 @@
-import logging
 from datetime import timezone
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
+from onlineacademy.settings import LANGUAGES
 from .models import Course, Assignment, Todo, Profile, Book, YouTubeVideo
 from .forms import ProfileForm, TodoForm, ContactForm, ProfileForm
 from django.urls import reverse
@@ -13,7 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import translation
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, activate
 from django.views.decorators.http import require_GET
 
 def oacademyapp(request):
@@ -50,7 +50,7 @@ def course_detail(request, course_id):
     return render(request, 'course_detail.html', {'course': course})
 
 
-@login_required
+@login_required(login_url='/login/')
 def assignments(request):
     """
     View to list all assignments.
@@ -70,7 +70,7 @@ def youtube_video_list(request):
     return render(request, 'youtube_video_list.html', context)
 
 
-@login_required
+@login_required(login_url='/login/')
 def todo(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Redirect to the login page if the user is not authenticated
@@ -152,7 +152,7 @@ def login_view(request):
         
     return render(request, 'registration/login.html')
 
-@login_required
+@login_required(login_url='/login/')
 def profile(request):
     try:
         user_profile = request.user.profile
@@ -169,7 +169,7 @@ def profile(request):
 
     return render(request, 'profile.html', {'form': form})
 
-@login_required
+@login_required(login_url='/login/')
 def profile_completion(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST)
@@ -184,8 +184,12 @@ def profile_completion(request):
     return render(request, 'profile.html', {'form': form})
 
 def logout_view(request):
-    logout(request)
-    return render(request, 'logout.html', {'logged_out': True})
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, "You have successfully logged out.")
+    else:
+        messages.warning(request, "You are not logged in.")
+    return redirect('home')
 
 def logged_out(request):
     return render(request, 'logged_out.html')
@@ -215,15 +219,8 @@ def contact(request):
 def success(request):
     return render(request, 'contact/success.html')
 
-
-logger = logging.getLogger(__name__)
-
 def set_language(request, lang_code):
-    if lang_code in dict(settings.LANGUAGES):
-        translation.activate(lang_code)
-        request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
-        response = redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the page they were on
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
-        return response
-    else:
-        return redirect('/')
+    if lang_code not in dict(LANGUAGES):
+        lang_code = 'en'
+    activate(lang_code)
+    return redirect(request.META.get('HTTP_REFERER', '/'))

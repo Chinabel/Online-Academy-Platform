@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 <!DOCTYPE html>
@@ -16,18 +17,28 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'courses' %}">Courses</a></li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'courses' %}">Courses</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
             </ul>
         </nav>
     </header>
     
     <div class="container">
-        <h2>You have successfully logged out.</h2>
+        <h2>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% else %}
+                You have successfully logged out.
+            {% endif %}
+        </h2>
+        <br><br>
         <p><a href="{% url 'login' %}">Click here to log in again.</a></p>
+        <br><br>
     </div>
 
     <footer>

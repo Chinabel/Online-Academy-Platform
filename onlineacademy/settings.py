@@ -78,20 +78,23 @@ TEMPLATES = [
 LANGUAGES = [
     ('en', 'English'),
     ('es', 'Spanish'),
-    ('fr', 'French'),
-    ('de', 'German'),
     ('pt', 'Portuguese'),
+    ('de', 'German'),
+    ('fr', 'French'), 
 ]
 
-TIME_ZONE = 'UTC'
-LANGUAGE_CODE = 'en-us'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+LANGUAGE_CODE = 'en'
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
 
 WSGI_APPLICATION = 'onlineacademy.wsgi.application'
 
